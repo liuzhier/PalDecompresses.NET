@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<StartupObject>PalDecompresses.PalDecompresses</StartupObject>
+		<ApplicationIcon>Icon\Pal.ico</ApplicationIcon>
+		<Description>免费，开源，开放的初代仙剑解档器</Description>
+		<Company>免费  开源  开放的初代仙剑解档器</Company>
+		<PackageReadmeFile></PackageReadmeFile>
+		<PackageReleaseNotes>免费，开源，开放的初代仙剑解档器</PackageReleaseNotes>
+		<Copyright>$(AssemblyName).免费  开源  开放的初代仙剑解档器</Copyright>
+		<PackageTags>$(AssemblyName).免费  开源  开放的初代仙剑解档器</PackageTags>
+		<Title>$(AssemblyName)</Title>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="Icon\Pal.ico" />
+	</ItemGroup>
+
+</Project>
