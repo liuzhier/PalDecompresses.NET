@@ -2013,7 +2013,7 @@ namespace PalDecompresses
         public static string
         PAL_DecToHex(
             long lValue,
-            int fIsHaveformat = 2
+            int fIsHaveformat = 1
         )
         {
             string strResult = "";
