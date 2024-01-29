@@ -1010,13 +1010,12 @@ namespace PalDecompresses
                         {
                             SCRIPTENTRY* lpScriptEntry;
                             string[] strarrThisEntryMsg;
-                            ushort wOperation;
-                            ushort[] rgwOperand = new ushort[3];
 
                             //
                             // 表头
                             //
-                            strContent += $"$ScriptEntryID\t脚本标题\t参数一备注\t参数一\t参数二备注\t参数二\t参数三备注\t参数三\t脚本注释{DocNewLine}";
+                            //strContent += $"$ScriptEntryID\t脚本标题\t参数一备注\t参数一\t参数二备注\t参数二\t参数三备注\t参数三\t脚本注释{DocNewLine}";
+                            strContent += $"$ScriptEntryID\t指令码\t参数一\t参数二\t参数三\t脚本注释{DocNewLine}";
 
                             //
                             // 表体
@@ -1027,8 +1026,10 @@ namespace PalDecompresses
 
                                 strarrThisEntryMsg = PAL_GetScriptEntryName(lpScriptEntry[i].wOperation);
 
-                                strContent += $"{PAL_DecToHex(i)}\t{strarrThisEntryMsg[1]}\t#{strarrThisEntryMsg[2]}\t{lpScriptEntry[i].rgwOperand1}\t" +
-                                    $"#{strarrThisEntryMsg[3]}\t{lpScriptEntry[i].rgwOperand2}\t#{strarrThisEntryMsg[4]}\t{lpScriptEntry[i].rgwOperand3}\t#{strarrThisEntryMsg[5]}{DocNewLine}";
+                                //strContent += $"{PAL_DecToHex(i)}\t{strarrThisEntryMsg[1]}\t#{strarrThisEntryMsg[2]}\t{lpScriptEntry[i].rgwOperand1}\t" +
+                                //$"#{strarrThisEntryMsg[3]}\t{lpScriptEntry[i].rgwOperand2}\t#{strarrThisEntryMsg[4]}\t{lpScriptEntry[i].rgwOperand3}\t#{strarrThisEntryMsg[5]}{DocNewLine}";
+                                strContent += $"{PAL_DecToHex(i)}\t{PAL_DecToHex(lpScriptEntry[i].wOperation)}\t{PAL_DecToHex(lpScriptEntry[i].rgwOperand1)}\t" +
+                                    $"{PAL_DecToHex(lpScriptEntry[i].rgwOperand2)}\t{PAL_DecToHex(lpScriptEntry[i].rgwOperand3)}\t{strarrThisEntryMsg[5]}{DocNewLine}";
                             }
                         }
                         break;
@@ -2012,16 +2013,23 @@ namespace PalDecompresses
         public static string
         PAL_DecToHex(
             long lValue,
-            bool fIsHaveformat = TRUE
+            int fIsHaveformat = 2
         )
         {
-            string strResult = Convert.ToString(lValue, 16).ToUpper();
+            string strResult = "";
 
-            if (fIsHaveformat)
-                strResult = "0x" +
-                    ((lValue < 0x10) ? "000" :
-                    ((lValue < 0x100) ? "00" :
-                    ((lValue < 0x1000) ? "0" : ""))) + strResult + "H";
+            if (fIsHaveformat > 1) strResult += "0x";
+
+            if (fIsHaveformat > 0)
+            {
+                strResult += lValue.ToString("X4");
+            }
+            else if(fIsHaveformat == 0)
+            {
+                strResult += Convert.ToString(lValue, 16).ToUpper();
+            }
+
+            //if (fIsHaveformat > 1) strResult += "H";
 
             return strResult;
         }
